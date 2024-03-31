@@ -6,7 +6,7 @@
 ██║     ██║  ██║██║     ███████╗██║  ██║    ██║     ███████╗╚██████╔╝   ██║
 ╚═╝     ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝    ╚═╝     ╚══════╝ ╚═════╝    ╚═╝
 @Title    : 混合契约下应急物资政企三级联合储备模型研究
-@Author   : Guo Keting, Gong Lingjun
+@Author   : Guo Keting, Gong Lingjun*
 @Created  : 2023-10-19
 @Revision : 2024-03-30
 @Submit   : CN [Chinese Journal of management science]
@@ -53,8 +53,9 @@ fig = plt.figure(figsize=(6.7, 6))
 ax = plt.subplot(111)
 
 # Plot the surfaces
-ctf = ax.contourf(X, Y, Z, cmap=plt.get_cmap("gray_r"))
+CS = ax.contourf(X, Y, Z, cmap=plt.get_cmap("gray_r"))
 
+# Annotate contour labels
 ax.xaxis.set_major_locator(MultipleLocator(0.1))
 ax.xaxis.set_minor_locator(MultipleLocator(0.05))
 ax.yaxis.set_major_locator(MultipleLocator(30))
@@ -65,6 +66,7 @@ ax.set_xlabel("$\\rho$", size=26)
 ax.set_ylabel("$c_2$", size=26)
 ax.tick_params(labelsize=18)
 
+# Annotate contour labels
 ax.annotate("3000", fontsize=14, xy=(0.678, 201.0), rotation=41, color="#c9c9c9")
 ax.annotate("1500", fontsize=14, xy=(0.765, 125.4), rotation=12, color="#c9c9c9")
 ax.annotate("0", fontsize=14, xy=(0.799, 86.5), rotation=0)
@@ -72,7 +74,7 @@ ax.annotate("-1500", fontsize=14, xy=(0.779, 64.5), rotation=-2)
 ax.annotate("-3000", fontsize=14, xy=(0.743, 52.5), rotation=-3)
 
 # Color bar
-cbar = fig.colorbar(ctf, fraction=0.045, pad=0.05)
+cbar = fig.colorbar(CS, fraction=0.045, pad=0.05)
 cbar.ax.tick_params(labelsize=18)
 
 # legend

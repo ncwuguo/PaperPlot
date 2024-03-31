@@ -6,11 +6,11 @@
 ██║     ██║  ██║██║     ███████╗██║  ██║    ██║     ███████╗╚██████╔╝   ██║
 ╚═╝     ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝    ╚═╝     ╚══════╝ ╚═════╝    ╚═╝
 @Title    : 混合契约下应急物资政企三级联合储备模型研究
-@Author   : Guo Keting, Gong Lingjun
+@Author   : Guo Keting, Gong Lingjun*
 @Created  : 2023-10-19
 @Revision : 2024-03-30
 @Submit   : CN [Chinese Journal of management science]
-@Descrip  : Fig.3 Comparison of supplier's profits
+@Descrip  : Fig.3 Comparison of supplier's profit
 """
 
 import matplotlib as mpl  # noqa: F401
@@ -58,7 +58,7 @@ fig = plt.figure(figsize=(6.7, 6))
 ax = plt.subplot(111)
 
 # Plot
-ctf = ax.contourf(X, Y, Z, cmap=plt.get_cmap("gray_r"))
+CS = ax.contourf(X, Y, Z, cmap=plt.get_cmap("gray_r"))
 
 ax.xaxis.set_major_locator(MultipleLocator(0.1))
 ax.xaxis.set_minor_locator(MultipleLocator(0.05))
@@ -70,6 +70,7 @@ ax.set_xlabel("$\\rho$", size=26)
 ax.set_ylabel("$c_2$", size=26)
 ax.tick_params(labelsize=18)
 
+# Annotate contour labels
 ax.annotate("40000", fontsize=14, xy=(0.615, 192.5), rotation=92, color="#c9c9c9")
 ax.annotate("32000", fontsize=14, xy=(0.754, 145.4), rotation=74, color="#c9c9c9")
 ax.annotate("24000", fontsize=14, xy=(0.799, 90.6), rotation=15, color="#c9c9c9")
@@ -78,7 +79,7 @@ ax.annotate("8000", fontsize=14, xy=(0.833, 60.1), rotation=2)
 ax.annotate("0", fontsize=14, xy=(0.877, 52.7), rotation=0)
 
 # Color bar
-cbar = fig.colorbar(ctf, fraction=0.045, pad=0.05)
+cbar = fig.colorbar(CS, fraction=0.045, pad=0.05)
 cbar.ax.tick_params(labelsize=18)
 
 # legend
