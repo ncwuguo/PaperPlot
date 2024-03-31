@@ -6,11 +6,11 @@
 ██║     ██║  ██║██║     ███████╗██║  ██║    ██║     ███████╗╚██████╔╝   ██║
 ╚═╝     ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝    ╚═╝     ╚══════╝ ╚═════╝    ╚═╝
 @Title    : 数量柔性契约下的政企三方联合储备决策研究
-@Author   : GONG Lingjun, JIANG Xingyu
+@Author   : GONG Lingjun, JIANG Xingyu, GUO Keting*
 @Created  : 2024-03-06
-@Revision : 2024-03-06
-@Submit   : Nan
-@Descrip  : Fig.4  Comparison of Manufacturers' Expected Profits under the Two Models
+@Revision : 2024-03-14
+@Submit   : CN [China Safety Science Journal]
+@Descrip  : Fig.4 Comparison of Manufacturer's Expected Profit under the Two Models
 """
 
 import matplotlib as mpl  # noqa: F401
@@ -22,7 +22,7 @@ from matplotlib.ticker import MultipleLocator, ScalarFormatter
 from mpl_toolkits.mplot3d import Axes3D
 
 
-# initial settings
+# Initial settings
 # mpl.rcParams["svg.fonttype"] = "none"
 plt.style.use(["science", "grid", "no-latex"])
 
@@ -39,7 +39,7 @@ M0, M1 = 20, 25
 HG, HM, HS = 15, 10, 5
 S, V = 10, 5
 
-# Calculate the values of cost_government under benchmark (q_0)) and mainmodel (qc, q1, q2)
+# Calculate the values of manufacturer's expected profit under benchmark and mainmodel
 q0 = U * (1 - (P0 + HS - S) / (X * (M - S)))
 qc = U * (1 - (P0 + HG - S) / (X * (P1 - S)))
 q1 = U * (1 - (W0 + M0 + HM - S) / (X * (Y + M1 - S))) - qc
@@ -58,10 +58,11 @@ fig = plt.figure(figsize=(7, 5.5))
 ax = Axes3D(fig, auto_add_to_figure=False)
 fig.add_axes(ax)
 
-# Plot the surfaces
+# Plot
 ax.plot_surface(X, Y, benchmark_profit_manufac, label="benchmark", color="#222222")
 ax.plot_surface(X, Y, mainmodel_profit_manufac, label="mainModel", color="#666666")
 
+# Ticker and labels
 ax.invert_xaxis()
 ax.set_xlabel("$\\rho$", size=22, labelpad=10)
 ax.set_ylabel("$w_1$", size=22, labelpad=10)
@@ -69,7 +70,7 @@ ax.tick_params(labelsize=18)
 ax.xaxis.set_minor_locator(MultipleLocator(0.1))
 ax.yaxis.set_major_locator(MultipleLocator(25))
 ax.yaxis.set_minor_locator(MultipleLocator(25))
-# ax.zaxis.set_minor_locator(MultipleLocator(1000))
+ax.zaxis.set_major_locator(MultipleLocator(100000))
 ax.zaxis.get_offset_text().set(size=18)
 z_formatter = ScalarFormatter(useMathText=True)
 z_formatter.set_scientific(True)
@@ -77,7 +78,7 @@ z_formatter.set_powerlimits((-2, 2))
 z_axis = ax.get_zaxis()
 z_axis.set_major_formatter(z_formatter)
 
-# show legend
+# Legend
 colors = ["#222222", "#666666"]
 legend_labels = ["$\\Pi_{m0}$", "$\\Pi_{m1}$"]
 legend_handles = [Rectangle((0, 0), 1, 1, fc=color) for color in colors]
@@ -93,6 +94,7 @@ ax.legend(
     bbox_to_anchor=(1.14, 0.8),
 )
 
+# Add tick labels manually
 plt.setp(ax.get_xticklabels(), visible=False)
 plt.setp(ax.get_yticklabels(), visible=False)
 plt.setp(ax.get_zticklabels(), visible=False)
@@ -114,6 +116,6 @@ for z, text in zip(
 ):
     ax.text(x=0.37, y=234, z=z, s=text, fontsize=20)
 
-# Set the view angle and display the plot
+# Set view angle, Show
 ax.view_init(elev=28, azim=-45)
 plt.show()

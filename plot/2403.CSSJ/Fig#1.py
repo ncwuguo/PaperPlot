@@ -6,12 +6,11 @@
 ██║     ██║  ██║██║     ███████╗██║  ██║    ██║     ███████╗╚██████╔╝   ██║
 ╚═╝     ╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝    ╚═╝     ╚══════╝ ╚═════╝    ╚═╝
 @Title    : 数量柔性契约下的政企三方联合储备决策研究
-@Author   : GONG Lingjun, JIANG Xingyu
+@Author   : GONG Lingjun, JIANG Xingyu, GUO Keting*
 @Created  : 2024-03-05
-@Revision : 2024-03-05
-@Submit   : Nan
-@Descrip  : Fig.1 Comparison of government reserves under two models
-TODO: 调整坐标刻度
+@Revision : 2024-03-14
+@Submit   : CN [China Safety Science Journal]
+@Descrip  : Fig.1 Comparison of Government Reserves under two Models
 """
 
 import matplotlib as mpl  # noqa: F401
@@ -23,7 +22,7 @@ from matplotlib.ticker import MultipleLocator, ScalarFormatter
 from mpl_toolkits.mplot3d import Axes3D
 
 
-# initial settings
+# Initial settings
 # mpl.rcParams["svg.fonttype"] = "none"
 plt.style.use(["science", "grid", "no-latex"])
 
@@ -40,7 +39,7 @@ M0, M1 = 20, 25
 HG, HM, HS = 15, 10, 5
 S, V = 10, 5
 
-# Calculate the values of Q_0, Q_cm
+# Calculate the values of government reserves under benchmark (Q_0) and mainmodel Q_cm
 q0 = U * (1 - (P0 + HG - S) / (X * (M - S)))
 qc = U * (1 - (P0 + HG - S) / (X * (P1 - S)))
 
@@ -52,10 +51,11 @@ fig = plt.figure(figsize=(7, 5.5))
 ax = Axes3D(fig, auto_add_to_figure=False)
 fig.add_axes(ax)
 
-# Plot the surfaces
+# Plot
 ax.plot_surface(X, Y, benchmark_quantity_gov, label="benchmark", color="#222222")
 ax.plot_surface(X, Y, mainmodel_quantity_gov, label="mainModel", color="#666666")
 
+# Ticker and labels
 ax.invert_xaxis()
 ax.set_xlabel("$\\rho$", size=22, labelpad=10)
 ax.set_ylabel("$w_1$", size=22, labelpad=10)
@@ -71,7 +71,7 @@ z_formatter.set_powerlimits((-2, 2))
 z_axis = ax.get_zaxis()
 z_axis.set_major_formatter(z_formatter)
 
-# show legend
+# Legend
 colors = ["#222222", "#666666"]
 legend_labels = ["$Q_0$", "$Q_c$"]
 legend_handles = [Rectangle((0, 0), 1, 1, fc=color) for color in colors]
@@ -87,6 +87,7 @@ ax.legend(
     bbox_to_anchor=(1.14, 0.8),
 )
 
+# Add tick labels manually
 plt.setp(ax.get_xticklabels(), visible=False)
 plt.setp(ax.get_yticklabels(), visible=False)
 plt.setp(ax.get_zticklabels(), visible=False)
@@ -108,6 +109,6 @@ for z, text in zip(
 ):
     ax.text(x=0.37, y=234, z=z, s=text, fontsize=20)
 
-# # Set the view angle and display the plot
+# Set view angle, Show
 ax.view_init(elev=28, azim=-45)
 plt.show()
