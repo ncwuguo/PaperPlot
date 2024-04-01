@@ -21,12 +21,12 @@ from matplotlib.patches import Rectangle
 from matplotlib.ticker import MultipleLocator
 
 
-# initial settings
+# Initial settings
 # mpl.rcParams["svg.fonttype"] = "none"
 plt.style.use(["science", "no-latex"])
 
 # Grid data X, Y and meshgrid. X -> \rho, Y -> c_2
-X, Y = np.meshgrid(np.linspace(0.6, 1, 30), np.linspace(50, 250, 30))
+X, Y = np.meshgrid(np.linspace(0.6, 1, 30), np.linspace(80, 250, 30))
 
 # Set parameter values
 U, MU = 20000, 10000
@@ -53,6 +53,7 @@ ax = plt.subplot(111)
 # Plot
 CS = ax.contourf(X, Y, Z, cmap=plt.get_cmap("gray_r"))
 
+# Ticker and labels
 ax.xaxis.set_major_locator(MultipleLocator(0.1))
 ax.xaxis.set_minor_locator(MultipleLocator(0.05))
 ax.yaxis.set_major_locator(MultipleLocator(30))
@@ -65,18 +66,17 @@ ax.tick_params(labelsize=18)
 
 # Annotate contour labels
 ax.annotate("0", fontsize=14, xy=(0.800, 215.5), rotation=0, color="#c9c9c9")
-ax.annotate("-2000", fontsize=14, xy=(0.765, 141.4), rotation=-8, color="#c9c9c9")
-ax.annotate("-4000", fontsize=14, xy=(0.749, 104.1), rotation=-7, color="#c9c9c9")
-ax.annotate("-6000", fontsize=14, xy=(0.729, 81.5), rotation=-9)
-ax.annotate("-8000", fontsize=14, xy=(0.713, 66.1), rotation=-10)
-ax.annotate("-10000", fontsize=14, xy=(0.682, 56.0), rotation=-10)
-ax.annotate("-12000", fontsize=14, xy=(0.618, 51.0), rotation=-10)
+ax.annotate("-1500", fontsize=14, xy=(0.765, 155.4), rotation=-8, color="#c9c9c9")
+ax.annotate("-3000", fontsize=14, xy=(0.749, 121.7), rotation=-9, color="#c9c9c9")
+ax.annotate("-4500", fontsize=14, xy=(0.729, 99.9), rotation=-8)
+ax.annotate("-6000", fontsize=14, xy=(0.683, 86.1), rotation=-10)
+ax.annotate("-7500", fontsize=14, xy=(0.601, 80.1), rotation=-10)
 
 # Color bar
 cbar = fig.colorbar(CS, fraction=0.045, pad=0.05)
 cbar.ax.tick_params(labelsize=18)
 
-# legend
+# Legend
 colors = ["#555555"]
 legend_labels = ["$q_m-q_a$"]
 legend_handles = [Rectangle((0, 0), 1, 1, fc=color) for color in colors]
@@ -92,7 +92,7 @@ ax.legend(
     bbox_to_anchor=(0.55, 1.2),
 )
 
-# show
+# Show
 ax.set_box_aspect(1)
 fig.tight_layout()
 plt.show()

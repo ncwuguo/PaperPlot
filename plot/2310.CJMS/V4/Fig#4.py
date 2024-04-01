@@ -21,12 +21,12 @@ from matplotlib.patches import Rectangle
 from matplotlib.ticker import MultipleLocator
 
 
-# initial settings
+# Initial settings
 # mpl.rcParams["svg.fonttype"] = "none"
 plt.style.use(["science", "no-latex"])
 
 # Grid data X, Y and meshgrid. X -> \rho, Y -> c_2
-X, Y = np.meshgrid(np.linspace(0.6, 1, 30), np.linspace(50, 250, 30))
+X, Y = np.meshgrid(np.linspace(0.6, 1, 30), np.linspace(80, 250, 30))
 
 # Set parameter values
 U, MU = 20000, 10000
@@ -45,18 +45,16 @@ Qa = U * (1 - (W + HG - V) / (X * (E - V)))
 qa = U * (1 - (C1 + G0 + H0 - V) / (X * (E - V))) - Qa
 
 benchmark_profit_m = (
-    Qa * (W - C1 - G0)
+    (W - C1 - G0) * Qa
     + (V - X * V - C1 - G0 - H0) * qa
     + X * (E * qa - (E - V) * (((Qa + qa) ** 2 - Qa**2) / (2 * U)))
 )
 mainmodel_profit_m = (
     (W - C1 - G0) * Qg
-    + (V + O - C1 - H0 - G0) * qm
-    + X
-    * (
-        (E - V) * (qm - ((Qg + qm) ** 2 - Qg**2) / (2 * U))
-        + (E - Y - G) * (qs - ((Qg + qm + qs) ** 2 - (Qg + qm) ** 2) / (2 * U))
-    )
+    + (V - C1 - G0 - H0) * qm
+    - O * qs
+    + X * (E - V) * (qm - ((Qg + qm) ** 2 - Qg**2) / (2 * U))
+    + X * (E - Y - G) * (qs - ((Qg + qm + qs) ** 2 - (Qg + qm) ** 2) / (2 * U))
 )
 Z = mainmodel_profit_m - benchmark_profit_m
 
@@ -67,6 +65,7 @@ ax = plt.subplot(111)
 # Plot
 CS = ax.contourf(X, Y, Z, cmap=plt.get_cmap("gray_r"))
 
+# Ticker and labels
 ax.xaxis.set_major_locator(MultipleLocator(0.1))
 ax.xaxis.set_minor_locator(MultipleLocator(0.05))
 ax.yaxis.set_major_locator(MultipleLocator(30))
@@ -78,17 +77,17 @@ ax.set_ylabel("$c_2$", size=26)
 ax.tick_params(labelsize=18)
 
 # Annotate contour labels
-ax.annotate("175000", fontsize=14, xy=(0.615, 68.5), rotation=22, color="#c9c9c9")
-ax.annotate("150000", fontsize=14, xy=(0.704, 67.4), rotation=12, color="#c9c9c9")
-ax.annotate("125000", fontsize=14, xy=(0.799, 65.3), rotation=7)
-ax.annotate("100000", fontsize=14, xy=(0.852, 58.9), rotation=4)
-ax.annotate("75000", fontsize=14, xy=(0.933, 55.1), rotation=2)
+ax.annotate("180000", fontsize=14, xy=(0.615, 107.5), rotation=-55, color="#c9c9c9")
+ax.annotate("160000", fontsize=14, xy=(0.674, 118.4), rotation=-49, color="#c9c9c9")
+ax.annotate("140000", fontsize=14, xy=(0.739, 131.7), rotation=-45)
+ax.annotate("120000", fontsize=14, xy=(0.822, 148.9), rotation=-40)
+ax.annotate("100000", fontsize=14, xy=(0.853, 195.1), rotation=-41)
 
 # Color bar
 cbar = fig.colorbar(CS, fraction=0.045, pad=0.05)
 cbar.ax.tick_params(labelsize=18)
 
-# legend
+# Legend
 colors = ["#555555"]
 legend_labels = ["$E\,\\Pi_m-E\,\\Pi_{am}$"]
 legend_handles = [Rectangle((0, 0), 1, 1, fc=color) for color in colors]
@@ -104,7 +103,7 @@ ax.legend(
     bbox_to_anchor=(0.55, 1.2),
 )
 
-# show
+# Show
 ax.set_box_aspect(1)
 fig.tight_layout()
 plt.show()

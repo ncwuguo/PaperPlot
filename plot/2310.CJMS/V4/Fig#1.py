@@ -21,12 +21,12 @@ from matplotlib.patches import Rectangle
 from matplotlib.ticker import MultipleLocator
 
 
-# initial settings
+# Initial settings
 # mpl.rcParams["svg.fonttype"] = "none"
 plt.style.use(["science", "no-latex"])
 
 # Grid data X, Y and meshgrid. X -> \rho, Y -> c_2
-X, Y = np.meshgrid(np.linspace(0.6, 1, 30), np.linspace(50, 250, 30))
+X, Y = np.meshgrid(np.linspace(0.6, 1, 30), np.linspace(80, 250, 30))
 
 # Set parameter values
 U, MU = 20000, 10000
@@ -55,7 +55,7 @@ ax = plt.subplot(111)
 # Plot the surfaces
 CS = ax.contourf(X, Y, Z, cmap=plt.get_cmap("gray_r"))
 
-# Annotate contour labels
+# Ticker and labels
 ax.xaxis.set_major_locator(MultipleLocator(0.1))
 ax.xaxis.set_minor_locator(MultipleLocator(0.05))
 ax.yaxis.set_major_locator(MultipleLocator(30))
@@ -67,9 +67,13 @@ ax.set_ylabel("$c_2$", size=26)
 ax.tick_params(labelsize=18)
 
 # Annotate contour labels
-ax.annotate("3000", fontsize=14, xy=(0.678, 201.0), rotation=41, color="#c9c9c9")
-ax.annotate("1500", fontsize=14, xy=(0.765, 125.4), rotation=12, color="#c9c9c9")
-ax.annotate("0", fontsize=14, xy=(0.799, 86.5), rotation=0)
+ax.annotate("3600", fontsize=14, xy=(0.611, 227.0), rotation=62, color="#c9c9c9")
+ax.annotate("3000", fontsize=14, xy=(0.678, 202.0), rotation=44, color="#c9c9c9")
+ax.annotate("2400", fontsize=14, xy=(0.748, 172.6), rotation=34, color="#c9c9c9")
+ax.annotate("1800", fontsize=14, xy=(0.784, 142.4), rotation=14)
+ax.annotate("1200", fontsize=14, xy=(0.794, 117.6), rotation=7)
+ax.annotate("600", fontsize=14, xy=(0.804, 100.1), rotation=4)
+ax.annotate("0", fontsize=14, xy=(0.815, 86.5), rotation=0)
 ax.annotate("-1500", fontsize=14, xy=(0.779, 64.5), rotation=-2)
 ax.annotate("-3000", fontsize=14, xy=(0.743, 52.5), rotation=-3)
 
@@ -77,7 +81,7 @@ ax.annotate("-3000", fontsize=14, xy=(0.743, 52.5), rotation=-3)
 cbar = fig.colorbar(CS, fraction=0.045, pad=0.05)
 cbar.ax.tick_params(labelsize=18)
 
-# legend
+# Legend
 colors = ["#555555"]
 legend_labels = ["$(Q_g + q_m + q_s)-(Q_a + q_a)$"]
 legend_handles = [Rectangle((0, 0), 1, 1, fc=color) for color in colors]
@@ -93,7 +97,7 @@ ax.legend(
     bbox_to_anchor=(0.55, 1.2),
 )
 
-# show
+# Show
 ax.set_box_aspect(1)
 fig.tight_layout()
 plt.show()
