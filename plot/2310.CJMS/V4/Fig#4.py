@@ -77,11 +77,13 @@ ax.set_ylabel("$c_2$", size=26)
 ax.tick_params(labelsize=18)
 
 # Annotate contour labels
-ax.annotate("180000", fontsize=14, xy=(0.615, 107.5), rotation=-55, color="#c9c9c9")
-ax.annotate("160000", fontsize=14, xy=(0.674, 118.4), rotation=-49, color="#c9c9c9")
-ax.annotate("140000", fontsize=14, xy=(0.739, 131.7), rotation=-45)
-ax.annotate("120000", fontsize=14, xy=(0.822, 148.9), rotation=-40)
-ax.annotate("100000", fontsize=14, xy=(0.853, 195.1), rotation=-41)
+ax.annotate("-15000", fontsize=14, xy=(0.762, 233.2), rotation=9)
+ax.annotate("0", fontsize=14, xy=(0.795, 195.8), rotation=0)
+ax.annotate("15000", fontsize=14, xy=(0.772, 164.7), rotation=-4)
+ax.annotate("30000", fontsize=14, xy=(0.762, 138.7), rotation=-10)
+ax.annotate("45000", fontsize=14, xy=(0.753, 115.9), rotation=-10, color="#cfcfcf")
+ax.annotate("60000", fontsize=14, xy=(0.734, 95.3), rotation=-15, color="#cfcfcf")
+ax.annotate("75000", fontsize=14, xy=(0.614, 86.5), rotation=-27, color="#cfcfcf")
 
 # Color bar
 cbar = fig.colorbar(CS, fraction=0.045, pad=0.05)
